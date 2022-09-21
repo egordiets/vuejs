@@ -1,20 +1,104 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
-    <CalcCom/>
+    <header>
+      <div class="header">My personal costs</div>
+    </header>
+    <main>
+      <add-payment-form @add-payment="addNewPayment"/>
+      <payments-display :items="paymentsList" showItems/>
+    </main>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-import CalcCom from '@/components/CalcCom.vue'
+// import HelloWorld from './components/HelloWorld.vue'
+// import CalcCom from '@/components/CalcCom.vue'
+import PaymentsDisplay from '@/components/PaymentsDisplay.vue'
+import AddPaymentForm from '@/components/AddPaymentForm.vue'
 
 export default {
   name: 'App',
+  data () {
+    return {
+      show: true,
+      paymentsList: []
+    }
+  },
+  methods: {
+    fetchData () {
+      return [
+        {
+          date: '28.03.2020',
+          category: 'Food',
+          value: 169
+        },
+        {
+          date: '24.03.2020',
+          category: 'Transport',
+          value: 360
+        },
+        {
+          date: '24.03.2020',
+          category: 'Food',
+          value: 532
+        },
+        {
+          date: '28.03.2020',
+          category: 'Food',
+          value: 169
+        },
+        {
+          date: '24.03.2020',
+          category: 'Transport',
+          value: 360
+        },
+        {
+          date: '24.03.2020',
+          category: 'Food',
+          value: 532
+        },
+        {
+          date: '24.03.2020',
+          category: 'Food',
+          value: 532
+        },
+        {
+          date: '24.03.2020',
+          category: 'Food',
+          value: 532
+        },
+        {
+          date: '24.03.2020',
+          category: 'Food',
+          value: 532
+        },
+        {
+          date: '24.03.2020',
+          category: 'Food',
+          value: 532
+        },
+        {
+          date: '24.03.2020',
+          category: 'Food',
+          value: 532
+        }
+      ]
+    },
+    addNewPayment (data) {
+      console.log(data)
+      this.paymentsList.push(data)
+    }
+  },
+  computed: {
+  },
   components: {
-    HelloWorld,
-    CalcCom
+    // HelloWorld,
+    // CalcCom,
+    PaymentsDisplay,
+    AddPaymentForm
+  },
+  created () {
+    this.paymentsList = this.fetchData()
   }
 }
 </script>
