@@ -1,18 +1,16 @@
 <template>
   <div>
     <div>
-      <button @click="toggleAddForm">Add new cost +</button>
-    </div>
-    <div v-show="showForm">
-      <label for="amount">
-        <input id="amount" type="text" placeholder="Amount" v-model="amount">
-      </label>
-      <label for="type">
-        <input id="type" type="text" placeholder="Type" v-model="type">
-      </label>
-      <label for="date">
-        <input id="date" type="text" placeholder="Date" v-model="date">
-      </label>
+      <input type="text" placeholder="Amount" v-model="value">
+<!--      <input type="text" placeholder="Type" v-model="category">-->
+      <select v-model="category">
+        <option
+          v-for="category of categoryList"
+          :value="category"
+          :key="category"
+        >{{ category }}</option>
+      </select>
+      <input type="text" placeholder="Date" v-model="date">
       <button @click="addPayment">Add</button>
     </div>
   </div>
@@ -21,16 +19,34 @@
 <script>
 export default {
   name: 'AddPaymentForm',
-  data () {
-    return {
-      amount: '',
-      type: '',
-      date: '',
-      showForm: false
+  props: {
+    categoryList: {
+      type: Array,
+      default: () => []
+    }
+  },
+  data: () => ({
+    value: '',
+    category: '',
+    date: ''
+  }),
+  methods: {
+    addPayment () {
+      // console.log('add', this.currenDate)
+      const { value, category, date, currenDate } = this
+      const data = {
+        value,
+        category,
+        // date: date ? date : currenDate
+        date: date || currenDate
+      }
+      // console.log(data)
+
+      this.$emit('add-payment', data)
     }
   },
   computed: {
-    paymentDate () {
+    currenDate () {
       const currentDate = new Date()
       const day = currentDate.getDate()
       const month = currentDate.getMonth() + 1
@@ -38,24 +54,10 @@ export default {
 
       return `${day}.${month}.${year}`
     }
-  },
-  methods: {
-    addPayment () {
-      const data = {
-        amount: +this.amount,
-        type: this.type,
-        date: this.date || this.paymentDate
-      }
-
-      this.$emit('add-payment', data)
-    },
-    toggleAddForm () {
-      this.showForm = !this.showForm
-    }
   }
 }
 </script>
 
-<style scoped>
+<style module>
 
 </style>
