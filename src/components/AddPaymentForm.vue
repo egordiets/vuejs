@@ -1,7 +1,7 @@
 <template>
   <div>
     <div>
-      <input type="text" placeholder="Amount" v-model="value">
+      <input type="text" placeholder="Value" v-model="value">
 <!--      <input type="text" placeholder="Type" v-model="category">-->
       <select v-model="category">
         <option
@@ -26,9 +26,9 @@ export default {
     }
   },
   data: () => ({
-    value: '',
+    date: '',
     category: '',
-    date: ''
+    value: ''
   }),
   methods: {
     addPayment () {

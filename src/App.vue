@@ -35,8 +35,8 @@ export default {
     AddPaymentForm
   },
   data: () => ({
-    page: 1,
-    n: 3
+    // page: 1,
+    // n: 3
   }),
   computed: {
     ...mapGetters(['paymentsList', 'categoryList', 'totalCost'])
@@ -72,15 +72,15 @@ export default {
       // this.$store.commit('ADD_PAYMENT_DATA', data)
       // this.ADD_PAYMENT_DATA(data)
       this.addNewPayment(data)
-    },
-    onChangePage (p) {
-      this.page = p
-      this.fetchData(p)
     }
+    // onChangePage (p) {
+    //   this.page = p
+    //   this.fetchData(p)
+    // }
   },
   created () {
     this.fetchCategoryData()
-    this.fetchData(1)
+    this.fetchData()
     // setTimeout(() => {
     //   this.$store.commit('EDIT_PAYMENT_DATA', {
     //     date: '24.03.2020',

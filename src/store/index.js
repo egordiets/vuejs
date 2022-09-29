@@ -6,24 +6,24 @@ Vue.use(Vuex)
 
 const API_DATA = {
   page1: [
-    { id: 1, date: '20.03.2020', category: 'Food', value: 169 },
-    { id: 2, date: '21.03.2020', category: 'Navigation', value: 50 },
-    { id: 3, date: '22.03.2020', category: 'Sport', value: 450 }
+    { date: '20.03.2020', category: 'Food', value: 169 },
+    { date: '21.03.2020', category: 'Navigation', value: 50 },
+    { date: '22.03.2020', category: 'Sport', value: 450 }
   ],
   page2: [
-    { id: 4, date: '23.03.2020', category: 'Entertaiment', value: 969 },
-    { id: 5, date: '24.03.2020', category: 'Education', value: 1500 },
-    { id: 6, date: '25.03.2020', category: 'Food', value: 200 }
+    { date: '23.03.2020', category: 'Entertaiment', value: 969 },
+    { date: '24.03.2020', category: 'Education', value: 1500 },
+    { date: '25.03.2020', category: 'Food', value: 200 }
   ],
   page3: [
-    { id: 1, date: '20.03.2020', category: 'Food', value: 169 },
-    { id: 2, date: '21.03.2020', category: 'Navigation', value: 50 },
-    { id: 3, date: '22.03.2020', category: 'Sport', value: 450 }
+    { date: '20.03.2020', category: 'Food', value: 169 },
+    { date: '21.03.2020', category: 'Navigation', value: 50 },
+    { date: '22.03.2020', category: 'Sport', value: 450 }
   ],
   page4: [
-    { id: 4, date: '23.03.2020', category: 'Entertaiment', value: 969 },
-    { id: 5, date: '24.03.2020', category: 'Education', value: 1500 },
-    { id: 6, date: '25.03.2020', category: 'Food', value: 200 }
+    { date: '23.03.2020', category: 'Entertaiment', value: 969 },
+    { date: '24.03.2020', category: 'Education', value: 1500 },
+    { date: '25.03.2020', category: 'Food', value: 200 }
   ]
 }
 
@@ -41,15 +41,15 @@ export default new Vuex.Store({
   },
   mutations: {
     SET_PAYMENTS_LIST (state, paymentsList) {
-      // state.paymentsList = paymentsList
-      const newUniwIdsObg = paymentsList.filter((item) => {
-        var paymentsListByPage = state.paymentsListByPage
-        return paymentsListByPage.indexOf(item.id) // Uncaught TypeError не могу понять почему
-      })
+      state.paymentsList = paymentsList
+      // const newUniwIdsObg = paymentsList.filter((item) => {
+      //   var paymentsListByPage = state.paymentsListByPage
+      //   return paymentsListByPage.indexOf(item.id) // Uncaught TypeError не могу понять почему
+      // })
 
-      const uniqIds = newUniwIdsObg.map(obj => obj.id)
-      state.paymentsList.push(...newUniwIdsObg)
-      state.paymentsListByPage.push(...uniqIds)
+      // const uniqIds = newUniwIdsObg.map(obj => obj.id)
+      // state.paymentsList.push(...newUniwIdsObg)
+      // state.paymentsListByPage.push(...uniqIds)
     },
     // SET_CATEGORY_LIST (state, categoryList) {
     //   state.categoryList = categoryList
