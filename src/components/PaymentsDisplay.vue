@@ -28,7 +28,7 @@ export default {
   //     type: Array,
   //     default: () => ([])
   //   },
-  //   showItems: {
+  //   show: {
   //     type: Boolean,
   //     default: false
   //   }
