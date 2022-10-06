@@ -1,7 +1,7 @@
 <template>
   <div>
     <div>
-      <input type="text" placeholder="Value" v-model="value">
+      <input type="text" placeholder="Amount" v-model="value">
 <!--      <input type="text" placeholder="Type" v-model="category">-->
       <select v-model="category">
         <option
@@ -17,36 +17,41 @@
 </template>
 
 <script>
+import { mapActions, mapGetters } from 'vuex'
+
 export default {
   name: 'AddPaymentForm',
-  props: {
-    categoryList: {
-      type: Array,
-      default: () => []
-    }
-  },
+  // props: {
+  //   categoryList: {
+  //     type: Array,
+  //     default: () => []
+  //   }
+  // },
   data: () => ({
-    date: '',
+    value: '',
     category: '',
-    value: ''
+    date: ''
   }),
   methods: {
+    ...mapActions(['addNewPayment']),
     addPayment () {
       // console.log('add', this.currenDate)
       const { value, category, date, currenDate } = this
       const data = {
-        value,
+        value: +value,
         category,
         // date: date ? date : currenDate
         date: date || currenDate
       }
       // console.log(data)
 
-      this.$emit('add-payment', data)
+      this.addNewPayment(data)
+      // this.$emit('add-payment', data)
     }
   },
   computed: {
-    currenDate () {
+    ...mapGetters(['categoryList']),
+    currentDate () {
       const currentDate = new Date()
       const day = currentDate.getDate()
       const month = currentDate.getMonth() + 1

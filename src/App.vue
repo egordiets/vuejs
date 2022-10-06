@@ -36,6 +36,12 @@
       <router-view/>
       <button @click="goToPage">About</button>
     </main>
+    <transition name="fade">
+      <ModalWindowAddPayment
+        v-if="showModal"
+        :settings="modalSettings"
+      />
+    </transition>
   </div>
 </template>
 
@@ -48,6 +54,7 @@
 // import About from '../pages/About.vue'
 // import NotFound from '../pages/NotFound'
 // import Dashboard from '../pages/Dashboard'
+// import ModalWindowAddPayment from '@/components/ModalWindowAddPayment.vue'
 
 export default {
   name: 'App',
@@ -58,21 +65,31 @@ export default {
     // About,
     // NotFound,
     // Dashboard
+    ModalWindowAddPayment: () => import(/* webpackChunkName: "ModalWindow" */ '@/components/ModalWindowAddPayment.vue')
   },
   data: () => ({
     // page: 'dashboard'
     // show: true
     // paymentsList: []
+    showModal: false,
+    modalSettings: {}
   }),
   methods: {
-    goToPage () {
-      // this.$router.push('about')
-      this.$router.push({
-        name: 'about',
-        params: {
-          a: 'qwerty'
-        }
-      })
+    // goToPage () {
+    //   // this.$router.push('about')
+    //   this.$router.push({
+    //     name: 'about',
+    //     params: {
+    //       a: 'qwerty'
+    //     }
+    //   })
+    modalOpen (settings) {
+      this.modalSettings = settings
+      this.showModal = true
+    },
+
+    modalClose () {
+      this.showModal = false
     }
     // setPage () {
     //   // console.log(e.target)
@@ -149,6 +166,8 @@ export default {
     // window.addEventListener('popstate', this.setPage)
     // console.log(this.$router)
     // console.log(this.$route)
+    this.$modal.EventBus.$on('show', this.modalOpen)
+    this.$modal.EventBus.$on('hide', this.modalClose)
   }
 }
 </script>
@@ -161,5 +180,22 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+}
+.header {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.router-link {
+  margin: 0 5px;
+}
+
+.fade-enter-active, .fade-leave-active {
+  transition: opacity .8s;
+}
+
+.fade-enter, .fade-leave-to {
+  opacity: 0;
 }
 </style>
