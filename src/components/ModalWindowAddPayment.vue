@@ -21,7 +21,6 @@
 import AddPaymentForm from '@/components/AddPaymentForm.vue'
 import Auth from '@/components/AuthPay.vue'
 import { mapActions } from 'vuex'
-// fjgwjgjfgbjbisj
 
 export default {
   name: 'ModalWindowAddPayment',
