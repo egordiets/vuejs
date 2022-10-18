@@ -1,8 +1,18 @@
 <template>
-  <div>
+  <v-card class="text-left pa-8">
+    <v-text-field v-model="date" label="Date"/>
+    <v-select
+    v-model="category"
+    label="category"
+    :items="categoryList"
+    />
+    <v-text-field v-model="value" label="Value"/>
+    <v-btn @click="addPayment">Add payment</v-btn>
+  </v-card>
+  <!-- <div>
     <div>
       <input type="text" placeholder="Amount" v-model="value">
-<!--      <input type="text" placeholder="Type" v-model="category">-->
+     //<input type="text" placeholder="Type" v-model="category">
       <select v-model="category">
         <option
           v-for="category of categoryList"
@@ -13,7 +23,7 @@
       <input type="text" placeholder="Date" v-model="date">
       <button @click="addPayment">Add</button>
     </div>
-  </div>
+  </div> -->
 </template>
 
 <script>
