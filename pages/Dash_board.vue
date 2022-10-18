@@ -1,25 +1,53 @@
 <template>
-  <div>
-    <div class="header">My personal costs: {{ totalCost }}</div>
+  <v-container>
+    <v-row>
+      <div class="text-h5 text-sm-h3">My personal costs: {{ totalCost }}</div>
+    </v-row>
+    <v-row>
+      <v-col>
+        <v-dialog v-model="showModal">
+          <template v-slot:activator="{ on }">
+            <v-btn
+            color="primary"
+            v-on="on"
+            @click="showModal != showModal"
+          >
+            Add new cost
+            <v-icon>mdi-plus</v-icon>
+          </v-btn>
+          </template>
+          <v-card>
+            <add-payment-form/>
+          </v-card>
+        </v-dialog>
+        <div>
+          <PaymentsDisplay :payments-list="paymentsList"/>
+        </div>
+      </v-col>
+      <v-col>Graph</v-col>
+    </v-row>
+  </v-container>
+  <!-- <div>
+    <div class="header">My personal costs: {{ totalCost }}</div> -->
 <!--    <AddPaymentForm-->
 <!--      @add-payment="addPayment"-->
 <!--      :categoryList="categoryList"-->
 <!--    />-->
-    <PaymentsDisplay
+    <!-- <PaymentsDisplay
       :paymentsList="paymentsList"
       test="test"
       show
-    />
+    /> -->
 <!--    <button @click="addPaymentModal">Add Payment</button>-->
 <!--    <button @click="authModal">Auth</button>-->
-    <button @click="authModal">Auth</button>
-    <button @click="addPayment">Add Payment</button>
+    <!-- <button @click="authModal">Auth</button>
+    <button @click="addPayment">Add Payment</button> -->
 <!--    <ModalWindowAddPayment-->
 <!--      v-if="showModal"-->
 <!--      @close="close"-->
 <!--      :settings="modalSettings"-->
 <!--    />-->
-  </div>
+  <!-- </div> -->
 </template>
 
 <script>

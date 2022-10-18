@@ -18,6 +18,13 @@
       </MyButton>
       <router-view/>
     </v-main>
+    <transition name="fade">
+        <MdalWindowAddPayment
+        v-if="showModal"
+        :settings="modalStteings"
+        />
+
+      </transition>
   </v-app>
 </template>
 
@@ -27,11 +34,27 @@ import MyButton from '@/components/Button.vue'
 export default {
   name: 'App',
   components: {
-    MyButton
+    MyButton,
+    ModalWindowAddPayment: () => import(/* webpackChunkName: "ModalWindow" */ '@/components/ModalWindowAddPayment.vue')
   },
 
   data: () => ({
-    //
-  })
+    showModal: false,
+    modalStteings: {}
+  }),
+  methods: {
+    modalOpen (settings) {
+      this.modalSettings = settings
+      this.showModal = true
+    },
+
+    modalClose () {
+      this.showModal = false
+    }
+  },
+  mounted () {
+    this.$modal.EventBus.$on('show', this.modalOpen)
+    this.$modal.EventBus.$on('hide', this.modalClose)
+  }
 }
 </script>
